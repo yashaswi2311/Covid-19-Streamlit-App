@@ -1,6 +1,3 @@
-# pylint: disable=unused-variable
-# pylint: disable=anomalous-backslash-in-string
-
 import generic
 import pandas as pd
 import numpy as np
@@ -14,15 +11,12 @@ read_columns = {7:['Confirmed','State-level Cumulative'],9:['i_Confirmed','State
 
 # Module to display sidebar
 def display_sidebar(data):
-    # adm0_a3, Country/Region
     sel_region,sel_country = None, None
 
     # 1) Choose a Region/Country to display
     st.sidebar.header('Choose Region/Country below')
-    # st.sidebar.subheader('*Note*: Only multi-states countries are currently supported!')
 
     # Set candiates of region (Country/Region)
-    # st.sidebar.header('Choose Region/Country/State below')
     st.sidebar.markdown('Choose a Country/Region (e.g., Canada)')
     country = sorted(data.loc[data['len_states']>1,'Country/Region'].unique())
     country = ['Worldwide'] + list(country[:])
@@ -33,7 +27,6 @@ def display_sidebar(data):
         sel_region = data.loc[(data['len_states']>1) &  (data['Country/Region'].str.contains(sel_country)),'adm0_a3'].unique()[0]
 
     # 2) Choose a statistics
-    # st.text([val[1] for val in read_columns.values()])
     st.sidebar.markdown('Choose a Statistics (e.g., State-level Changes)')
     if sel_region:
         stat_text = sorted(list(set(val[1] for val in read_columns.values() if val[1][0]=='S')))
@@ -158,14 +151,8 @@ def show_map(data,stat,region=None,date=None):
     df['param'] = stat_text
     df.rename(columns={stat_keys[0]:'stat_0',stat_keys[1]:'stat_1'},inplace=True)
 
-    # st.write(df)
-
     view_state = pdk.ViewState(
-        latitude = df['lat'].mean(skipna=True),
-        longitude = df['lon'].mean(skipna=True),
-        # bearings=15,
-        # pitch=45,
-        zoom=zoom)
+        latitude = df['lat'].mean(skipna=True),longitude = df['lon'].mean(skipna=True),zoom=zoom)
 
     polygon_layer = pdk.Layer(
         "PolygonLayer",
@@ -176,10 +163,7 @@ def show_map(data,stat,region=None,date=None):
         get_polygon="coordinates",
         filled=True,
         get_elevation='elevation',
-        # elevation_scale=1e5,
-        # elevation_range=[0,100],
         extruded=True,
-        # wireframe=True,
         get_fill_color= 'fill_color',
         get_line_color=[255, 255, 255],
         auto_highlight=True,
@@ -194,8 +178,6 @@ def show_map(data,stat,region=None,date=None):
         initial_view_state=view_state,
         tooltip=tooltip,
         )
-
-    # return r
     st.pydeck_chart(r, use_container_width=True)
 
 

@@ -54,3 +54,4 @@ You need to have the following dependecies before running the app:
 
 1. Yashaswi Singh (https://www.linkedin.com/in/yashaswi-singh1/)
 2. Swaroop Gupta (https://www.linkedin.com/in/swaroopgupta/)
+3. Chinmay Rout (https://www.linkedin.com/in/routchinmay/)

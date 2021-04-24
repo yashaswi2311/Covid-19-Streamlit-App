@@ -1,6 +1,3 @@
-# pylint: disable=unused-variable
-# pylint: disable=anomalous-backslash-in-string
-
 import pandas as pd
 from datetime import datetime
 import streamlit as st

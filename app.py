@@ -5,7 +5,13 @@
 app.py: Frontend runner file for https://covid-streamlit-2021.herokuapp.com/
 
 Dependencies
-data: data/time_series_covid19.csv
+data: 
+data/time_series_covid19.csv
+time_series_covid19_confirmed_global.csv
+time_series_covid19_deaths_global.csv
+time_series_covid19_recovered_global.csv
+cases_country.csv
+
 modules:
 frontend.py: Front-end works
 generic.py: Load necessary files (infections, map)
@@ -24,8 +30,6 @@ from plotly.subplots import make_subplots
 import folium
 import numpy as np
 from datetime import date
-# from pygooglenews import GoogleNews
-
 
 
 filename = 'https://github.com/staedi/nCOV-summary/raw/master/time_series_covid19.csv'
@@ -63,9 +67,7 @@ frontend.show_stats(covid,sel_region,sel_country,chosen_stat,cand,sel_map)
 update_status.markdown("Job Complete!")
 
 
-
-
-# f'''
+# NOT USING THE pygooglenewsapi, it's deprecated
 # -----------------------------------
 
 # # Covid-19 News Feed Searcher
@@ -101,12 +103,15 @@ update_status.markdown("Job Complete!")
 #     '''
 
 
-# Read the data
+################################################################
+# Dataset for Exploratory Data Analysis
 confirmed_df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv')
 death_df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')
 recovered_df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv')
 country_df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases_country.csv')
 
+
+# Adding multiple themes, including light and dark mode
 if st.checkbox('Dark Mode'):
     st.markdown("""
     <style>
@@ -119,6 +124,8 @@ if st.checkbox('Dark Mode'):
     }
     </style>
     """, unsafe_allow_html=True)
+
+
 confirmed_total = int(country_df['Confirmed'].sum())
 active_total = int(country_df['Active'].sum())
 deaths_total = int(country_df['Deaths'].sum())
@@ -639,7 +646,6 @@ else:
         
     );
     st.plotly_chart(fig)
-##########################################################################
 
 
 ######################## Countries with zero cases #######################
@@ -658,8 +664,8 @@ else:
     st.write(temp_df)
 ##########################################################################
 
-# Caption for credits
-st.subheader('Credits')
+# Data Resource Credits
+st.subheader('Resource Credits')
 data_source = 'Johns Hopkins University CSSE'
 if sel_region == 'KOR':
     data_source = 'KCDC'
