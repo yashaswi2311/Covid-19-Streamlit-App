@@ -2,7 +2,7 @@
 # pylint: disable=anomalous-backslash-in-string
 
 '''
-app.py: Frontend runner file for nCovid_19 Streamlit application
+app.py: Frontend runner file for https://covid-streamlit-2021.herokuapp.com/
 
 Dependencies
 data: data/time_series_covid19.csv

@@ -8,7 +8,6 @@ import math
 import altair as alt
 import pydeck as pdk
 import streamlit as st
-# from pygooglenews import GoogleNews
 
 
 read_columns = {7:['Confirmed','State-level Cumulative'],9:['i_Confirmed','State-level Changes'],11:['Tot_Confirmed','Country-level Cumulative'],12:['iTot_Confirmed','Country-level Changes'],15:['Deaths','State-level Cumulative'],17:['i_Deaths','State-level Changes'],19:['Tot_Deaths','Country-level Cumulative'],20:['iTot_Deaths','Country-level Changes']}
@@ -112,14 +111,6 @@ def show_map(data,stat,region=None,date=None):
         [107,174,214],
         [49,130,189],
         [8,81,156],
-
-        # # 6-class Purples (For reference)
-        # [242,240,247],
-        # [218,218,235],
-        # [188,189,220],
-        # [158,154,200],
-        # [117,107,177],
-        # [84,39,143],
     ]
 
     def color_scale(val):
@@ -160,13 +151,6 @@ def show_map(data,stat,region=None,date=None):
         data = data.loc[data['adm0_a3']==region,['adm0_a3','Province/State','lat','lon',stat_keys[0],stat_keys[1]]]
         df = pd.merge(df,data,how='inner',left_on=['name','adm0_a3'],right_on=['Province/State','adm0_a3'])
         zoom = 3
-
-    # Moved to generic.py
-    # df.loc[df[stat_keys[0]]<0,stat_keys[0]] = 0
-    # df.loc[df[stat_keys[1]]<0,stat_keys[1]] = 0
-    # df[stat_keys[0]] = df[stat_keys[0]].apply(set_nan)
-    # df[stat_keys[1]] = df[stat_keys[1]].apply(set_nan)
-
 
     df['fill_color'] = (df[stat_keys[0]]/df[stat_keys[0]].max()).replace(np.nan,0).apply(color_scale)
     df['elevation'] = (df[stat_keys[1]]/df[stat_keys[1]].max()).replace(np.nan,0).apply(lambda x:elevation_scale(x,1e4))
