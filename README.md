@@ -3,7 +3,7 @@
 Checkout the dashboard app here -- https://covid-streamlit-2021.herokuapp.com/
 <br>
 
-![](https://www.apta.com/wp-content/uploads/home-banner-1.jpg)
+![](https://www.calexico.ca.gov/vertical/Sites/%7B342ED706-1EBB-4FDE-BD1E-9543BAD44C09%7D/uploads/COVID.jpg)
 
 Coronaviruses or Covid-19 are a large family of viruses that may cause respiratory illnesses in humans ranging from common colds to more severe conditions such as Severe Acute Respiratory Syndrome (SARS) and Middle Eastern Respiratory Syndrome (MERS).
 
